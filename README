@@ -1,0 +1,42 @@
+## Project Overview
+This project demonstrates the interaction between three C programs that control a robotic system using named pipes (FIFOs):
+
+1. **Menu Handler**: Handles user input for robot movement commands.
+2. **Controller**: Interprets commands and manages step-by-step execution.
+3. **Motor**: Executes movement based on commands received.
+
+---
+
+## Files Description
+
+### `menu_handler.c`
+- **Purpose**: Acts as a user interface for sending movement commands.
+- **Main Functionality**:
+  - Uses `menu_pipe` FIFO to communicate with the Controller.
+  - Accepts and forwards commands such as `move`, `stop`, and `quit`.
+
+### `controller.c`
+- **Purpose**: Central command processing unit.
+- **Main Functionality**:
+  - Reads commands from `menu_pipe`.
+  - Processes and forwards movement data to the Motor via `controller_motor_pipe`.
+
+### `motor.c`
+- **Purpose**: Executes robotic movements.
+- **Main Functionality**:
+  - Reads and writes the movement instructions from `controller_motor_pipe`.
+
+---
+
+## How to Use
+1. **Compile the Programs**:
+    make
+2. **Run each file in seperate terminals**
+    run_menu_handler
+    run_controller
+    run_motor
+
+## Νotes:
+1. **Ensure named pipes are removed after execution to avoid conflicts**
+2. **Send signals through a 4th terminal to simulate errors**
+
